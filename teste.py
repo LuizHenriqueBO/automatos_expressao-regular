@@ -12,7 +12,7 @@ class transformacao():
         estado_final  = 'q1'
 
         automato = list()
-        automato.append(letra)
+        automato.append([letra])
         automato.append('E')
         automato.append([estado_inicio,estado_final])
         automato.append(estado_inicio)
@@ -29,7 +29,7 @@ class transformacao():
         estado_final  = 'q3'
 
         automato = list()
-        automato.append(letra)
+        automato.append([letra])
         automato.append('E')
         automato.append([estado_inicio,'q1','q2',estado_final])
         automato.append(estado_inicio)
@@ -44,14 +44,19 @@ class transformacao():
 
 
     def transformacao_concatenacao(self, letra1, letra2):
+        estado_inicio = 'q0'
+        estado_final  = 'q3'
+
         automato = list()
-        subautomato1 = self.transformacao_basica(letra1, self.inicio, self.fim)
-        automato.append(subautomato1)
-        estado_final  = 'q'+str(self.fim+1)
-        automato.append([subautomato1[2], 'E', estado_final])
-        subautomato2 = self.transformacao_basica(letra2, self.fim+1, self.fim+2)
-        automato.append(subautomato2)
-        
+        automato.append([letra1,letra2])
+        automato.append('E')
+        automato.append([estado_inicio,'q1','q2',estado_final])
+        automato.append(estado_inicio)
+        automato.append(estado_final)
+        automato.append(['q0',letra1,'q1'])
+        automato.append(['q1','E','q2'])
+        automato.append(['q2',letra2,'q3'])
+
         return automato
 
 
@@ -63,7 +68,7 @@ autom3 = list()
 
 autom = tr.transformacao_basica('d')
 autom2 = tr.transformacao_fecho_kleene('d')
-#autom3 = tr.transformacao_concatenacao('a','b')
+autom3 = tr.transformacao_concatenacao('a','b')
 
 print("\n basico:")
 for i in autom:
@@ -73,9 +78,9 @@ print("\n fecho de Kleene:")
 for i in autom2:
     print(i)
 
-# print("\n concatenacao:")
-# for i in autom3:
-#     print(i)
+print("\n concatenacao:")
+for i in autom3:
+    print(i)
 
 
 # a b               alfabeto entrada

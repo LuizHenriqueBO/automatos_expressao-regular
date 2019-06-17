@@ -2,8 +2,8 @@ import sys
 import string
 #pl = sys.argv[1]
 num_parenteses = 0
-#expressao = 'a*b(c)*(a*a(g(j)*)s+d)*b+bb(aa+s)*+p(ll)+pl+llllllll+l'
-expressao = 'aab(b+c*)ffgjiok*n*'
+#expressao = 'aba+c*+l'
+expressao = 'a*ab(a+b+c*)ff(g)*iok*n*'
 sub_xprs = list()
 full_xprs = list()
 ou = False
@@ -22,21 +22,20 @@ for i in range(len(expressao)):
         '''se o simbolo for fecha parenteses'''
         num_parenteses -= 1
 
-        if num_parenteses == 0 and i+1 < len(expressao)and expressao[i+1] != '*' and ou == False:
-            ''' se nao estiver entre parenteses, simbolo seguinte nao for *, e nao estiver expressao de uniao externa'''
-            full_xprs.append(sub_xprs.copy())
-            '''expressao completa recebe a sub expressao ate o fecha parenteses'''
-            sub_xprs.clear()
-            '''apaga a sub expressao'''
-
         if num_parenteses == 0 and i == len(expressao)-1:
             '''se nao estiver entre parenteses, e for o ultimo simbolo'''
-            full_xprs.append(sub_xprs.copy())
+            if ou == True:
+                full_xprs.append(sub_xprs.copy())
+            else:
+                if len(full_xprs)>0:
+                    full_xprs[len(full_xprs)-1]+=sub_xprs.copy()
+                else:
+                    full_xprs.append(sub_xprs.copy())
             '''expressao completa recebe a sub expressao ate o fecha parenteses'''
             sub_xprs.clear()
             '''apaga a sub expressao'''
 
-    elif num_parenteses == 0 and expressao[i] == '*' and i-1 >= 0 and expressao[i-1] != ')' and ou == False:
+    elif expressao[i] == '*' and i-1 >= 0 and expressao[i-1] != ')' and ou == False:
         '''se nao estiver entre parenteses, o simbolo for * , simbolo anterior nao for fecha parenteses, e nao estiver em uniao externa'''
         h = list()
         h.append(sub_xprs.pop())
@@ -50,54 +49,76 @@ for i in range(len(expressao)):
         '''h adicionado em sub expressao'''
         if ou == False and len(sub_xprs) > 0:
             '''se nao estiver em uniao externa e houver sub expressao para adicionar'''
-            full_xprs.append(sub_xprs.copy())
+            if len(full_xprs)>0:
+                full_xprs[len(full_xprs)-1]+=sub_xprs.copy()
+            else:
+                full_xprs.append(sub_xprs.copy())
             '''expressao completa recebe sub expressao'''
         sub_xprs.clear()
         '''apaga a sub expressao'''
 
-    elif num_parenteses == 0 and expressao[i] == '*' and ou == False and ou == False:
+    elif num_parenteses == 0 and expressao[i] == '*' and ou == False :
         '''se nao estiver entre parenteses, simbolo for * e nao estiver em uniao externa'''
-        full_xprs.append(sub_xprs.copy())
+        if len(full_xprs)>0:
+            full_xprs[len(full_xprs)-1]+=sub_xprs.copy()
+        else:
+            full_xprs.append(sub_xprs.copy())
         '''expressao completa recebe a sub expressao ate o fecha parenteses'''
         sub_xprs.clear()
         '''apaga a sub expressao'''
+    
+    elif num_parenteses == 0 and expressao[i] == '*' and ou == True:
+        if len(full_xprs)>0:
+            full_xprs.append(sub_xprs.copy())
+        else:
+            full_xprs[len(full_xprs)-1]+=sub_xprs.copy()
+        sub_xprs.clear()
+        
 
     elif expressao[i] == '+':
         '''se simbolo for +'''
         if num_parenteses == 0:
             '''se nao estiver entre parenteses'''
             ou = True
-            w = list()
 
+            w = list(sub_xprs.pop()) 
+            '''w recebe simbolo +'''
             if len(sub_xprs) > 1:
                 '''se havia simbolos para salvar antes do +'''
-                w = list(sub_xprs.pop()) 
-                '''w recebe simbolo +'''
-                full_xprs.append(sub_xprs.copy()) 
+                if len(full_xprs)>0 and'+' not in full_xprs[len(full_xprs)-1] :
+                    full_xprs[len(full_xprs)-1]+=sub_xprs.copy()
+                else:
+                    full_xprs.append(sub_xprs.copy())
                 '''expressao completa recebe o resto da sub expressao'''
 
-            else:
-                '''se a sub expressao ja havia sido salva'''
-                w = sub_xprs.copy() 
-                '''w recebe simbolo +'''
             full_xprs.append(w.copy()) 
             '''expressao completa recebe simbolo +'''
             sub_xprs.clear() 
             '''apaga sub expressao'''
+        else:
+            ou=False
 
-    elif len(sub_xprs) == 1 and num_parenteses == 0 and ou == True:
+    elif num_parenteses == 0 and ou ==True and '+' not in full_xprs[len(full_xprs)-1] :
+        '''simbolo unico fora de parenteses'''
         ''' se for um unico simbolo, nao estiver entre parenteses e estiver em uniao externa'''
-        full_xprs.append(sub_xprs.copy())
+        if len(full_xprs)>0 and expressao[i+1]!='*':
+            full_xprs[len(full_xprs)-1]+=sub_xprs
+        else:
+            full_xprs.append(sub_xprs.copy())
         '''expressao completa recebe a sub expressao ate o fecha parenteses'''
         sub_xprs.clear()
         '''apaga a sub expressao'''
 
-    elif i == len(expressao)-1:
+    elif i==len(expressao)-1:
         '''se for o ultimo simbolo da expressao'''
-        full_xprs.append(sub_xprs.copy())
+        if ou == True:
+            full_xprs.append(sub_xprs.copy())
+        else:
+            full_xprs[len(full_xprs)-1]+=sub_xprs.copy()
         '''expressao completa recebe a sub expressao ate o fecha parenteses'''
         sub_xprs.clear()
         '''apaga a sub expressao'''
+    
 
 
 #expressao = [i.replace('(aas)','') for i in expressao]

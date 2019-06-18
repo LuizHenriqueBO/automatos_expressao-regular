@@ -26,12 +26,13 @@ class Main(object):
             automato = Automato()
             for i in automato1.lista_transicao:
                 automato.add_transicao(i.origem.nome, i.nome, i.destino.nome)
-            automato2 = self.renomeia_estados_automato(automato, automato2)
+            automato2 = self.renomeia_estados_automato(automato1, automato2)
             automato.add_transicao(automato1.fim.nome, automato.branco, automato2.inicio.nome)
             for i in automato2.lista_transicao:
                 automato.add_transicao(i.origem.nome, i.nome, i.destino.nome)
-            #automato.set_automato_inicial(automato1.inicio.nome)
+            automato.set_automato_inicial(automato1.inicio.nome)
             automato.set_automato_final(automato2.fim.nome)
+
             return automato
         print("\n\n erro, não é autômato\n\n")
         return False
@@ -49,7 +50,7 @@ class Main(object):
             automato.add_transicao(automato.inicio.nome,automato.branco,automato2.inicio.nome)
             for i in automato2.lista_transicao:
                 automato.add_transicao(i.origem.nome, i.nome, i.destino.nome)
-            automato.set_automato_final(automato.add_estado(self.letra_estado + str(int(automato2.fim.nome[1])+1)).nome)
+            automato.set_automato_final(automato.add_estado(self.letra_estado + str(1+int(automato2.fim.nome[1:]))).nome)
             automato.add_transicao(automato1.fim.nome, automato.branco, automato.fim.nome)
             automato.add_transicao(automato2.fim.nome, automato.branco, automato.fim.nome)            
             return automato
@@ -67,7 +68,7 @@ class Main(object):
                 automato.add_transicao(i.origem.nome, i.nome, i.destino.nome)
 
             automato.add_transicao(automato1.fim.nome, automato.branco, automato1.inicio.nome)
-            automato.set_automato_final(automato.add_estado(self.letra_estado + str(int(automato1.fim.nome[1])+1)).nome)
+            automato.set_automato_final(automato.add_estado(self.letra_estado + str(1+(int(automato1.fim.nome[1:])))).nome)
             automato.add_transicao(automato1.fim.nome, automato.branco, automato.fim.nome)
             automato.add_transicao(automato.inicio.nome, automato.branco, automato.fim.nome)
             return automato
@@ -78,18 +79,30 @@ class Main(object):
 
 
 
-teste = Main()
+# teste = Main()
 
-aut = Automato()
-aut2 = Automato()
+# automato = Automato()
+# aut1 = automato.criar_automato('a')
+# aut2 = automato.criar_automato('b')
+# aut3 = automato.criar_automato('t')
+# aut4 = automato.criar_automato('c')
+# aut5 = automato.criar_automato('d')
+
+# aut2 = teste.concatenacao(aut2,aut3)
+# aut1 = teste.concatenacao(aut1,aut2)
+
+# aut3 = teste.concatenacao(aut4,aut5)
+# aut3 = teste.fecho_kleene(aut3)
+
+# aut1 = teste.uniao(aut1,aut3)
+
+# # aut1 = teste.concatenacao(aut4,aut5)
+
+# aut1.imprimir_automato()
 
 
-aut.criar_automato('a')
-aut2.criar_automato('b')
+# automato = teste.concatenacao(aut,aut2)
 
-automato = teste.concatenacao(aut,aut2)
-
-automato.imprimir_automato()
 
 # exp = "a.b.c.d+a.b"
 # group = exp.split("+")

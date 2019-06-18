@@ -17,13 +17,16 @@ class Automato(object):
     def criar_automato(self, nome):
         if(nome != None):
             if(nome != self.branco):
-                self.inicio = Estado('q0')
-                self.fim    = Estado('q1')
-                transicao = Transicao(self.inicio, nome, self.fim)
-                self.lista_transicao = [transicao]
-                self.lista_estado = [self.inicio, self.fim]
-                self.alfabeto = [transicao.nome]
-                return True
+                new_automato                   = Automato()
+                new_automato.inicio            = Estado('q0')
+                new_automato.fim               = Estado('q1')
+                transicao                      = Transicao(self.inicio, nome, self.fim)
+                new_automato.lista_transicao   = [transicao]
+                new_automato.lista_estado      = [self.inicio, self.fim]
+                new_automato.alfabeto          = [transicao.nome]
+                new_automato.branco            = 'E'
+
+                return new_automato
             else:
                 print("erro: nome esta sendo utilizado como caracter branco")
                 return False
@@ -36,7 +39,7 @@ class Automato(object):
 
     def add_estado(self, nome_estado):
         for estado in self.lista_estado:
-            if(estado.get_estado_nome() == nome_estado):
+            if(estado.nome == nome_estado):
                 return estado
         estado = Estado(nome_estado)
         self.lista_estado.append(estado)
@@ -95,8 +98,12 @@ class Automato(object):
 
 
 # aut = Automato()
-# aut2 = Automato()
+# # aut2 = Automato()
 
+# aut = aut.criar_automato('a')
+# # aut.criar_automato
+
+# aut.imprimir_automato()
 # aut.add_transicao('q0','a','q2')
 # aut.add_transicao('q3','E','q4')
 # aut.add_transicao('q2','b','q3')

@@ -6,4 +6,6 @@ class Estado(object):
 
     def get_estado_nome(self):
         return self.nome
+
+    
         

@@ -41,12 +41,12 @@ class Main(object):
     def uniao(self, automato1, automato2): 
         if(type(automato1) is Automato) and (type(automato2) is Automato):
             automato = Automato()
-            automato.add_estado('q0')
-            automato1 = self.renomeia_estados_automato(automato,automato1)
+            # automato1 = automato.criar_automato(automato.branco)
+            automato1 = self.renomeia_estados_automato(automato1,automato1)
             automato.add_transicao(automato.inicio.nome, automato.branco, automato1.inicio.nome)
             for i in automato1.lista_transicao:
                 automato.add_transicao(i.origem.nome, i.nome, i.destino.nome)
-            automato2 = self.renomeia_estados_automato(automato, automato2)
+            automato2 = self.renomeia_estados_automato(automato1, automato2)
             automato.add_transicao(automato.inicio.nome,automato.branco,automato2.inicio.nome)
             for i in automato2.lista_transicao:
                 automato.add_transicao(i.origem.nome, i.nome, i.destino.nome)
@@ -68,6 +68,7 @@ class Main(object):
                 automato.add_transicao(i.origem.nome, i.nome, i.destino.nome)
 
             automato.add_transicao(automato1.fim.nome, automato.branco, automato1.inicio.nome)
+            automato.set_automato_inicial(automato.inicio.nome)
             automato.set_automato_final(automato.add_estado(self.letra_estado + str(1+(int(automato1.fim.nome[1:])))).nome)
             automato.add_transicao(automato1.fim.nome, automato.branco, automato.fim.nome)
             automato.add_transicao(automato.inicio.nome, automato.branco, automato.fim.nome)

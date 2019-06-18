@@ -15,3 +15,6 @@ class Pilha(object):
         self.dado.append(elemento)
         self.tamanho +=1
 
+    def imprimir_pilha(self):
+        for i in self.dado:
+            i.imprimir_automato()

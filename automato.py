@@ -3,37 +3,22 @@ from transicao import *
 
 
 class Automato(object):
-    def __init__(self):
-        self.lista_transicao  = list()
-        self.lista_estado     = list()
-        self.inicio           = Estado('q0')
-        self.fim              = Estado('q1')
-        self.alfabeto         = list()
-        self.branco           = 'E'
+    def __init__(self, nome='E'):
+        self.inicio           =  Estado('q0')
+        self.fim              =  Estado('q1')
+        self.lista_estado     =  [self.inicio,self.fim]
+        transicao             =  Transicao(self.inicio, nome, self.fim)
+        self.lista_transicao  =  [transicao]
+        self.alfabeto         =  [transicao.nome]
+        self.branco           =  'E'
 
-
-
-
-    def criar_automato(self, nome):
-        if(nome != None):
-            if(nome != self.branco):
-                new_automato                   = Automato()
-                new_automato.inicio            = Estado('q0')
-                new_automato.fim               = Estado('q1')
-                transicao                      = Transicao(self.inicio, nome, self.fim)
-                new_automato.lista_transicao   = [transicao]
-                new_automato.lista_estado      = [self.inicio, self.fim]
-                new_automato.alfabeto          = [transicao.nome]
-                new_automato.branco            = 'E'
-
-                return new_automato
-            else:
-                print("erro: nome esta sendo utilizado como caracter branco")
-                return False
-        else:
-            print("erro: nome não informado")
-            return False
-
+        # self.inicio           =  Estado('q0')
+        # self.fim              =  Estado('q1')
+        # self.lista_estado     =  [self.inicio,self.fim]
+        # transicao             =  Transicao(self.inicio, nome, self.fim)
+        # self.lista_transicao  =  [transicao]
+        # self.alfabeto         =  [transicao.nome]
+        # self.branco           =  'E'
 
 
 

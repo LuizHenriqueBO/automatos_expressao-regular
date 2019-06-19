@@ -1,5 +1,5 @@
-
 from automato import *
+
 class Pilha(object):
     def __init__(self):
         self.tamanho = 0
@@ -14,6 +14,7 @@ class Pilha(object):
     def inserir_pilha(self, elemento):
         self.dado.append(elemento)
         self.tamanho +=1
+
 
     def imprimir_pilha(self):
         for i in self.dado:

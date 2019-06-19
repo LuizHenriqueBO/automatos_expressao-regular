@@ -1,6 +1,4 @@
-
 from transicao import *
-
 
 class Automato(object):
     def __init__(self, nome=None):
@@ -21,8 +19,6 @@ class Automato(object):
             self.branco           =  'E'
 
 
-
-
     def add_estado(self, nome_estado):
         if(nome_estado in self.lista_estado):
             return False
@@ -37,12 +33,8 @@ class Automato(object):
                 return estado
         return False
 
-    
-
-
 
     def add_transicao(self, origem, nome, destino):
-
         if(self.verifica_origem_e_destino_da_transicao(origem, destino) == False):
             if(self.get_estado(origem) == False):
                 self.add_estado(origem)
@@ -52,22 +44,17 @@ class Automato(object):
             self.lista_transicao.append(transicao)
             if(transicao.nome != self.branco):
                 if(transicao.nome not in self.alfabeto):
-                    self.alfabeto.append(transicao.nome)    
-            
+                    self.alfabeto.append(transicao.nome)                
             return True
-
-        #print("transicao ja existe: ", "origem:  ",origem," nome: ", nome, "  destino: ", destino)
         return False
 
 
-    # verifica se a origem e o destino ja existe na lista de transições
     def verifica_origem_e_destino_da_transicao(self, origem, destino):
         for transicao in self.lista_transicao:
             if ((transicao.origem == origem) and (transicao.destino == destino)):
                 return True
         return False
     
-
 
     def imprimir_automato(self):
         print(self.alfabeto)

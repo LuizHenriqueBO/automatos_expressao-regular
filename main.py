@@ -11,13 +11,15 @@ class Main(object):
         qtd = len(automato1.lista_estado)
         new_automato = Automato()
         for i in automato2.lista_transicao:
-            _origem = self.letra_estado+str(qtd + int(i.origem.nome[1]))
-            _destino = self.letra_estado+str(qtd + int(i.destino.nome[1]))
+            _origem = self.letra_estado+str(qtd + int(i.origem[1:]))
+            _destino = self.letra_estado+str(qtd + int(i.destino[1:]))
             new_automato.add_transicao(_origem,i.nome,_destino)
-        _inicio = self.letra_estado+str(qtd + int(automato2.inicio.nome[1]))
-        _fim = self.letra_estado+str(qtd + int(automato2.fim.nome[1]))
-        new_automato.set_automato_inicial(_inicio)
-        new_automato.set_automato_final(_fim)
+
+        _inicio = self.letra_estado+str(qtd + int(automato2.inicio[1:]))
+        new_automato.inicio = _inicio
+       
+        #_fim = self.letra_estado+str(qtd + int(automato2.fim[1:]))
+        #new_automato.set_automato_final(_fim)
         return new_automato
 
 
@@ -25,13 +27,13 @@ class Main(object):
         if(type(automato1) is Automato) and (type(automato2) is Automato):
             automato = Automato()
             for i in automato1.lista_transicao:
-                automato.add_transicao(i.origem.nome, i.nome, i.destino.nome)
-            automato2 = self.renomeia_estados_automato(automato1, automato2)
-            automato.add_transicao(automato1.fim.nome, automato.branco, automato2.inicio.nome)
+                automato.add_transicao(i.origem, i.nome, i.destino)
+            automato2 = self.renomeia_estados_automato(automato, automato2)
+
+            automato.add_transicao(automato1.fim, automato.branco, automato2.inicio)
             for i in automato2.lista_transicao:
-                automato.add_transicao(i.origem.nome, i.nome, i.destino.nome)
-            automato.set_automato_inicial(automato1.inicio.nome)
-            automato.set_automato_final(automato2.fim.nome)
+                automato.add_transicao(i.origem, i.nome, i.destino)
+            # automato.set_automato_final(automato2.fim)
 
             return automato
         print("\n\n erro, não é autômato\n\n")
@@ -42,17 +44,20 @@ class Main(object):
         if(type(automato1) is Automato) and (type(automato2) is Automato):
             automato = Automato()
             # automato1 = automato.criar_automato(automato.branco)
-            automato1 = self.renomeia_estados_automato(automato1,automato1)
-            automato.add_transicao(automato.inicio.nome, automato.branco, automato1.inicio.nome)
+            automato1 = self.renomeia_estados_automato(automato,automato1)
+            automato1.imprimir_automato()
+            automato.add_transicao(automato.inicio, automato.branco, automato1.inicio)
             for i in automato1.lista_transicao:
-                automato.add_transicao(i.origem.nome, i.nome, i.destino.nome)
+                automato.add_transicao(i.origem, i.nome, i.destino)
             automato2 = self.renomeia_estados_automato(automato1, automato2)
-            automato.add_transicao(automato.inicio.nome,automato.branco,automato2.inicio.nome)
+            automato.add_transicao(automato.inicio, automato.branco,automato2.inicio)
             for i in automato2.lista_transicao:
-                automato.add_transicao(i.origem.nome, i.nome, i.destino.nome)
-            automato.set_automato_final(automato.add_estado(self.letra_estado + str(1+int(automato2.fim.nome[1:]))).nome)
-            automato.add_transicao(automato1.fim.nome, automato.branco, automato.fim.nome)
-            automato.add_transicao(automato2.fim.nome, automato.branco, automato.fim.nome)            
+                automato.add_transicao(i.origem, i.nome, i.destino)
+            
+            automato.add_estado(self.letra_estado + str(1+int(automato2.fim[1:])))
+            
+            automato.add_transicao(automato1.fim, automato.branco, automato.fim)
+            automato.add_transicao(automato2.fim, automato.branco, automato.fim)            
             return automato
         print("\n\n erro, não é autômato\n\n")
         return False
@@ -61,17 +66,17 @@ class Main(object):
     def fecho_kleene(self, automato1):
         if(type(automato1) is Automato):
             automato = Automato()
-            automato.add_estado('q0')
-            automato1 = self.renomeia_estados_automato(automato,automato1)
-            automato.add_transicao(automato.inicio.nome, automato.branco, automato1.inicio.nome)
+            automato1 = self.renomeia_estados_automato(automato, automato1)
+            automato.add_transicao(automato.inicio, automato.branco, automato1.inicio)
             for i in automato1.lista_transicao:
-                automato.add_transicao(i.origem.nome, i.nome, i.destino.nome)
+                automato.add_transicao(i.origem, i.nome, i.destino)
 
-            automato.add_transicao(automato1.fim.nome, automato.branco, automato1.inicio.nome)
-            automato.set_automato_inicial(automato.inicio.nome)
-            automato.set_automato_final(automato.add_estado(self.letra_estado + str(1+(int(automato1.fim.nome[1:])))).nome)
-            automato.add_transicao(automato1.fim.nome, automato.branco, automato.fim.nome)
-            automato.add_transicao(automato.inicio.nome, automato.branco, automato.fim.nome)
+            automato.add_transicao(automato1.fim, automato.branco, automato1.inicio)
+            # automato.set_automato_inicial(automato.inicio.nome)
+            automato.add_estado(self.letra_estado + str(1+(int(automato1.fim[1:]))))
+
+            automato.add_transicao(automato1.fim, automato.branco, automato.fim)
+            automato.add_transicao(automato.inicio, automato.branco, automato.fim)
             return automato
         print("\n\n erro, não é autômato\n\n")
         return False
@@ -80,26 +85,27 @@ class Main(object):
 
 
 
-# teste = Main()
+teste = Main()
 
-# automato = Automato()
-# aut1 = automato.criar_automato('a')
-# aut2 = automato.criar_automato('b')
+aut1 = Automato('a')
+aut2 = Automato('b')
 # aut3 = automato.criar_automato('t')
 # aut4 = automato.criar_automato('c')
 # aut5 = automato.criar_automato('d')
 
-# aut2 = teste.concatenacao(aut2,aut3)
-# aut1 = teste.concatenacao(aut1,aut2)
-
+aut1 = teste.uniao(aut1,aut2)
+# aut1 = teste.concatenacao(aut2,aut3)
+# aut3 = teste.concatenacao(aut3,aut4)
 # aut3 = teste.concatenacao(aut4,aut5)
+
+
 # aut3 = teste.fecho_kleene(aut3)
 
 # aut1 = teste.uniao(aut1,aut3)
 
 # # aut1 = teste.concatenacao(aut4,aut5)
 
-# aut1.imprimir_automato()
+aut1.imprimir_automato()
 
 
 # automato = teste.concatenacao(aut,aut2)

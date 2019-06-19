@@ -6,11 +6,10 @@ from main import *
 from transicao import *
 
 transformacao = Main()
-alfabeto_entrada = 'a.(b+t)*+(c+(d+e)*)+g.h*'
+alfabeto_entrada = '(a.b*+(b.a)*).a.b+c*'
 alfabeto_pos_fixo = pos_fixo(alfabeto_entrada)
 print(alfabeto_pos_fixo)
 pilha_alfabeto = Pilha()
-
 
 
 for i in range(len(alfabeto_pos_fixo)):

@@ -1,4 +1,4 @@
-from estado import *
+
 from transicao import *
 
 
@@ -21,15 +21,6 @@ class Automato(object):
             self.branco           =  'E'
 
 
-    # def criar_automato(self, nome):
-
-    #     self.inicio           =  'q0'
-    #     self.fim              =  'q1'
-    #     self.lista_estado     =  [self.inicio,self.fim]
-    #     transicao             =  Transicao(self.inicio, nome, self.fim)
-    #     self.lista_transicao  =  [transicao]
-    #     self.alfabeto         =  [transicao.nome]
-    #     self.branco           =  'E'
 
 
     def add_estado(self, nome_estado):
@@ -77,18 +68,6 @@ class Automato(object):
         return False
     
 
-    # def set_automato_final(self, final):
-    #     self.fim = Estado(final)
-    
-    # def set_automato_inicial(self, inicio):
-    #     self.inicio = Estado(inicio)
-
-    # def get_automato_final(self):
-    #     return self.fim
-    
-    # def get_automato_inicio(self):
-    #     return self.inicio
-
 
     def imprimir_automato(self):
         print(self.alfabeto)
@@ -101,31 +80,6 @@ class Automato(object):
         for i in self.lista_transicao:
             print(f'[{i.origem} {i.nome} {i.destino}]')
         print("\n")
-
-    
-
-
-# aut = Automato()
-# ##aut2 = Automato()
-
-# # aut = aut.criar_automato('a')
-# # # aut.criar_automato
-# aut.add_transicao('q0','a','q2')
-# aut.imprimir_automato()
-# aut.add_transicao('q3','E','q4')
-# aut.add_transicao('q2','b','q3')
-# aut.add_transicao('q2','b','q3')
-# aut.set_automato_inicial('q0')
-# aut.set_automato_final('q4')
-
-
-# aut2.add_transicao('e2','b','e3')
-# aut2.set_automato_final('e3')
-# aut2.set_automato_inicial('e2')
-
-
-# aut.imprimir_automato()
-# aut2.imprimir_automato()
 
 
 

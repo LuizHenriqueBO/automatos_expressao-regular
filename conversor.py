@@ -36,10 +36,3 @@ def pos_fixo(expressao):
 
     return saida
 
-
-# c = 'a.(b.t)+(c.d)*'
-# dado  = insertExplicitConcatOperator(c)
-# dado2 = pos_fixo(c)
-
-# print(dado)
-# print(dado2)

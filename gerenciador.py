@@ -3,9 +3,10 @@ from pilha import *
 from main import *
 from transicao import *
 
-transformacao = Main()
-alfabeto_entrada = '(a.b*+(b.a)*).a.b+c*'
+alfabeto_entrada = '(a.b*+(b.a)*).a.b+c*+(1.5+p)*+(q+r+l).(z*+r.v.m*)*'
 alfabeto_pos_fixo = pos_fixo(alfabeto_entrada)
+# print(alfabeto_entrada)
+# print(alfabeto_pos_fixo)
 pilha_alfabeto = Pilha()
 
 
@@ -17,14 +18,14 @@ for i in range(len(alfabeto_pos_fixo)):
         if(alfabeto_pos_fixo[i] == '.'):
             dado2 = pilha_alfabeto.get_pilha()
             dado1 = pilha_alfabeto.get_pilha()
-            pilha_alfabeto.inserir_pilha(transformacao.concatenacao(dado1,dado2))
+            pilha_alfabeto.inserir_pilha(concatenacao(dado1, dado2))
         if(alfabeto_pos_fixo[i] == '+'):
             dado2 = pilha_alfabeto.get_pilha()
             dado1 = pilha_alfabeto.get_pilha()
-            pilha_alfabeto.inserir_pilha(transformacao.uniao(dado1,dado2))
+            pilha_alfabeto.inserir_pilha(uniao(dado1,dado2))
         if(alfabeto_pos_fixo[i] == '*'):
             dado = pilha_alfabeto.get_pilha()
-            pilha_alfabeto.inserir_pilha(transformacao.fecho_kleene(dado))
+            pilha_alfabeto.inserir_pilha(fecho_kleene(dado))
 
 
 automato = pilha_alfabeto.get_pilha()

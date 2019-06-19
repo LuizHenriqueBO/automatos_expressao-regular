@@ -2,8 +2,8 @@ from automato import *
 
 class Pilha(object):
     def __init__(self):
-        self.tamanho = 0
-        self.dado    = list()
+        self.tamanho  =  0
+        self.dado     =  list()
 
 
     def get_pilha(self):

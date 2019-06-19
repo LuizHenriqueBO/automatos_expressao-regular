@@ -10,8 +10,7 @@ def pos_fixo(expressao):
     operador_pilha = []
     for token in expressao:
         if (token == '.' or token == '+' or token == '*'):
-            while(len(operador_pilha) and busca_dados(operador_pilha) != '(' 
-            and operador_precedente[busca_dados(operador_pilha)] >= operador_precedente[token]):
+            while(len(operador_pilha) and busca_dados(operador_pilha) != '(' and operador_precedente[busca_dados(operador_pilha)] >= operador_precedente[token]):
                 saida += operador_pilha.pop()
             operador_pilha.append(token)
         elif (token == '(' or token == ')'):

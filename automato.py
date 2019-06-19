@@ -1,22 +1,23 @@
 from transicao import *
 
 class Automato(object):
+    
     def __init__(self, nome=None):
+    
+        self.letra_estado         =  'q'
+        self.inicio               =  self.letra_estado+(str(0))
+        self.branco               =  'E'
         if(nome != None):
-            self.inicio           =  'q0'
-            self.fim              =  'q1'
-            self.lista_estado     =  [self.inicio,self.fim]
+            self.fim              =  self.letra_estado+(str(1))
+            self.lista_estado     =  [self.inicio, self.fim]
             transicao             =  Transicao(self.inicio, nome, self.fim)
             self.lista_transicao  =  [transicao]
             self.alfabeto         =  [transicao.nome]
-            self.branco           =  'E'
         else:
-            self.inicio           =  'q0'
             self.fim              =  ''
-            self.lista_estado     =  ['q0']
+            self.lista_estado     =  [self.inicio]
             self.lista_transicao  =  []
             self.alfabeto         =  []
-            self.branco           =  'E'
 
 
     def add_estado(self, nome_estado):
@@ -67,7 +68,3 @@ class Automato(object):
         for i in self.lista_transicao:
             print(f'[{i.origem} {i.nome} {i.destino}]')
         print("\n")
-
-
-
-

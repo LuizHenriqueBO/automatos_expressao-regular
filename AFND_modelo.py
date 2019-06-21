@@ -1,12 +1,11 @@
 from transicao import *
 
-class Automato(object):
+class Automato:
     
     def __init__(self, nome=None):
     
         self.letra_estado         =  'q'
         self.inicio               =  self.letra_estado+(str(0))
-        self.branco               =  'E'
         if(nome != None):
             self.fim              =  self.letra_estado+(str(1))
             self.lista_estado     =  [self.inicio, self.fim]
@@ -18,6 +17,11 @@ class Automato(object):
             self.lista_estado     =  [self.inicio]
             self.lista_transicao  =  []
             self.alfabeto         =  []
+
+
+    @staticmethod
+    def epsilon():
+        return 'E'
 
 
     def add_estado(self, nome_estado):
@@ -43,7 +47,7 @@ class Automato(object):
                 self.add_estado(destino)
             transicao = Transicao(origem, nome, destino)
             self.lista_transicao.append(transicao)
-            if(transicao.nome != self.branco):
+            if(transicao.nome != self.epsilon()):
                 if(transicao.nome not in self.alfabeto):
                     self.alfabeto.append(transicao.nome)                
             return True
@@ -59,7 +63,7 @@ class Automato(object):
 
     def imprimir_automato(self):
         print(self.alfabeto)
-        print(self.branco)
+        print(self.epsilon())
         print(self.inicio)
         print(self.fim)
         for estados in self.lista_estado:

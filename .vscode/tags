@@ -1,0 +1,104 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+AFND_AFD.py	../AFND_AFD.py	1;"	kind:file	line:1
+AFND_controle.py	../AFND_controle.py	1;"	kind:file	line:1
+AFND_modelo.py	../AFND_modelo.py	1;"	kind:file	line:1
+Automata	../principal.py	/^class Automata:$/;"	kind:class	line:1
+Automata	../teste.py	/^class Automata:$/;"	kind:class	line:4
+Automato	../AFND_modelo.py	/^class Automato:$/;"	kind:class	line:3
+BuildAutomata	../teste.py	/^class BuildAutomata:$/;"	kind:class	line:143
+DFAfromNFA	../AFND_AFD.py	/^class DFAfromNFA:$/;"	kind:class	line:33
+DFAfromNFA	../teste.py	/^class DFAfromNFA:$/;"	kind:class	line:211
+Eliminar_epsilon_AFND	../implementando.py	/^def Eliminar_epsilon_AFND(AFND):$/;"	kind:function	line:4
+Eliminar_epsilon_AFND	../teste2.py	/^def Eliminar_epsilon_AFND(AFND):$/;"	kind:function	line:4
+NFAfromRegex	../teste.py	/^class NFAfromRegex:$/;"	kind:class	line:367
+Pilha	../pilha.py	/^class Pilha(object):$/;"	kind:class	line:3
+Transicao	../transicao.py	/^class Transicao(object):$/;"	kind:class	line:1
+__init__	../AFND_AFD.py	/^    def __init__(self, nfa):$/;"	kind:member	line:36
+__init__	../AFND_AFD.py	/^  def __init__(self, language = set(['0', '1'])):$/;"	kind:function	line:4
+__init__	../AFND_modelo.py	/^    def __init__(self, nome=None):$/;"	kind:member	line:5
+__init__	../pilha.py	/^    def __init__(self):$/;"	kind:member	line:4
+__init__	../principal.py	/^    def __init__(self, language = set(['0', '1'])):$/;"	kind:member	line:4
+__init__	../teste.py	/^    def __init__(self, language = set(['0', '1'])):$/;"	kind:member	line:7
+__init__	../teste.py	/^    def __init__(self, nfa):$/;"	kind:member	line:214
+__init__	../teste.py	/^    def __init__(self, regex):$/;"	kind:member	line:370
+__init__	../transicao.py	/^    def __init__(self, origem, nome, destino):$/;"	kind:member	line:2
+acceptsString	../teste.py	/^    def acceptsString(self, string):$/;"	kind:member	line:270
+addOperatorToStack	../teste.py	/^    def addOperatorToStack(self, char):$/;"	kind:member	line:440
+add_estado	../AFND_modelo.py	/^    def add_estado(self, nome_estado):$/;"	kind:member	line:29
+add_transicao	../AFND_modelo.py	/^    def add_transicao(self, origem, nome, destino):$/;"	kind:member	line:44
+addfinalstates	../teste.py	/^    def addfinalstates(self, state):$/;"	kind:member	line:22
+addtransition	../teste.py	/^    def addtransition(self, fromstate, tostate, inp):$/;"	kind:member	line:30
+addtransition_dict	../teste.py	/^    def addtransition_dict(self, transitions):$/;"	kind:member	line:45
+analise_expressao	../infixa_posfixa.py	/^def analise_expressao(expressao):$/;"	kind:function	line:11
+basicstruct	../teste.py	/^    def basicstruct(inp):$/;"	kind:member	line:147
+buildDFA	../AFND_AFD.py	/^    def buildDFA(self, nfa):$/;"	kind:member	line:52
+buildDFA	../teste.py	/^    def buildDFA(self, nfa):$/;"	kind:member	line:233
+buildNFA	../teste.py	/^    def buildNFA(self):$/;"	kind:member	line:393
+busca_dados	../infixa_posfixa.py	/^def busca_dados(pilha):$/;"	kind:function	line:4
+concatenacao	../AFND_controle.py	/^def concatenacao(automato1, automato2):$/;"	kind:function	line:33
+converter__ER__AFND	../gerenciador.py	/^def converter__ER__AFND(alfabeto_entrada):$/;"	kind:function	line:7
+converter_infixa_posfixa	../infixa_posfixa.py	/^def converter_infixa_posfixa(expressao):$/;"	kind:function	line:33
+display	../teste.py	/^    def display(self):$/;"	kind:member	line:73
+displayDFA	../AFND_AFD.py	/^    def displayDFA(self):$/;"	kind:member	line:46
+displayDFA	../teste.py	/^    def displayDFA(self):$/;"	kind:member	line:224
+displayMinimisedDFA	../AFND_AFD.py	/^    def displayMinimisedDFA(self):$/;"	kind:member	line:49
+displayMinimisedDFA	../teste.py	/^    def displayMinimisedDFA(self):$/;"	kind:member	line:227
+displayNFA	../teste.py	/^    def displayNFA(self):$/;"	kind:member	line:386
+dotstruct	../teste.py	/^    def dotstruct(a, b):$/;"	kind:member	line:174
+drawGraph	../teste.py	/^def drawGraph(automata, file = ""):$/;"	kind:function	line:470
+epsilon	../AFND_modelo.py	/^    def epsilon():$/;"	kind:member	line:25
+epsilon	../teste.py	/^    def epsilon():$/;"	kind:member	line:15
+fecho_kleene	../AFND_controle.py	/^def fecho_kleene(automato1):$/;"	kind:function	line:66
+gerenciador.py	../gerenciador.py	1;"	kind:file	line:1
+getDFA	../AFND_AFD.py	/^    def getDFA(self):$/;"	kind:member	line:40
+getDFA	../teste.py	/^    def getDFA(self):$/;"	kind:member	line:218
+getDotFile	../teste.py	/^    def getDotFile(self):$/;"	kind:member	line:121
+getEClose	../AFND_AFD.py	/^def getEClose(self, findstate):$/;"	kind:function	line:14
+getEClose	../principal.py	/^    def getEClose(self, findstate):$/;"	kind:member	line:55
+getEClose	../teste.py	/^    def getEClose(self, findstate):$/;"	kind:member	line:61
+getMinimisedDFA	../AFND_AFD.py	/^    def getMinimisedDFA(self):$/;"	kind:member	line:43
+getMinimisedDFA	../teste.py	/^    def getMinimisedDFA(self):$/;"	kind:member	line:221
+getNFA	../teste.py	/^    def getNFA(self):$/;"	kind:member	line:383
+getPrintText	../teste.py	/^    def getPrintText(self):$/;"	kind:member	line:84
+get_estado	../AFND_modelo.py	/^    def get_estado(self, nome_estado):$/;"	kind:member	line:37
+get_estados_epsilon	../AFND_modelo.py	/^    def get_estados_epsilon(self, estado_origem):$/;"	kind:member	line:91
+get_estados_epsilon2	../AFND_modelo.py	/^    def get_estados_epsilon2(self, estado_origem):$/;"	kind:member	line:103
+get_pilha	../pilha.py	/^    def get_pilha(self):$/;"	kind:member	line:9
+get_transicao_destino	../AFND_modelo.py	/^    def get_transicao_destino(self, estado, palavra):$/;"	kind:member	line:81
+gettransitions	../principal.py	/^    def gettransitions(self, state, key):$/;"	kind:member	line:44
+gettransitions	../teste.py	/^    def gettransitions(self, state, key):$/;"	kind:member	line:50
+implementando.py	../implementando.py	1;"	kind:file	line:1
+imprimir_automato	../AFND_modelo.py	/^    def imprimir_automato(self):$/;"	kind:member	line:66
+imprimir_pilha_automato	../pilha.py	/^    def imprimir_pilha_automato(self):$/;"	kind:member	line:19
+imprimir_pilha_expressao	../pilha.py	/^    def imprimir_pilha_expressao():$/;"	kind:member	line:23
+infixa_posfixa.py	../infixa_posfixa.py	1;"	kind:file	line:1
+inserir_pilha	../pilha.py	/^    def inserir_pilha(self, elemento):$/;"	kind:member	line:14
+isInstalled	../teste.py	/^def isInstalled(program):$/;"	kind:function	line:480
+is_exe	../teste.py	/^    def is_exe(fpath):$/;"	kind:function	line:483
+main	../main.py	/^def main():$/;"	kind:function	line:20
+main.py	../main.py	1;"	kind:file	line:1
+minimise	../AFND_AFD.py	/^    def minimise(self):$/;"	kind:member	line:92
+minimise	../teste.py	/^    def minimise(self):$/;"	kind:member	line:285
+newBuildFromEquivalentStates	../principal.py	/^    def newBuildFromEquivalentStates(self, equivalent, pos):$/;"	kind:member	line:107
+newBuildFromEquivalentStates	../teste.py	/^    def newBuildFromEquivalentStates(self, equivalent, pos):$/;"	kind:member	line:111
+newBuildFromNumber	../teste.py	/^    def newBuildFromNumber(self, startnum):$/;"	kind:member	line:98
+operador_precedente	../infixa_posfixa.py	/^operador_precedente = {'+': 0,'.': 1,'*': 2}$/;"	kind:variable	line:8
+organizar	../AFND_controle.py	/^def organizar(automato):$/;"	kind:function	line:12
+pilha.py	../pilha.py	1;"	kind:file	line:1
+plusstruct	../teste.py	/^    def plusstruct(a, b):$/;"	kind:member	line:157
+principal.py	../principal.py	1;"	kind:file	line:1
+processOperator	../teste.py	/^    def processOperator(self, operator):$/;"	kind:member	line:454
+renomeia_estados_automato	../AFND_controle.py	/^def renomeia_estados_automato(incremento, automato2):$/;"	kind:function	line:3
+setstartstate	../AFND_AFD.py	/^def setstartstate(self, state):$/;"	kind:function	line:28
+setstartstate	../teste.py	/^    def setstartstate(self, state):$/;"	kind:member	line:18
+starstruct	../teste.py	/^    def starstruct(a):$/;"	kind:member	line:188
+teste.py	../teste.py	1;"	kind:file	line:1
+teste2.py	../teste2.py	1;"	kind:file	line:1
+transicao.py	../transicao.py	1;"	kind:file	line:1
+uniao	../AFND_controle.py	/^def uniao(automato1, automato2): $/;"	kind:function	line:47
+verifica_origem_e_destino_da_transicao	../AFND_modelo.py	/^    def verifica_origem_e_destino_da_transicao(self, origem, nome, destino):$/;"	kind:member	line:59

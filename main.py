@@ -105,7 +105,7 @@ def testar_automato(arquivo_automato, exp_reg, automato):
             
             palavra_teste = verificar_teste(automato)
             popen('python3 fla/main.py '+arquivo_automato+' '+palavra_teste+' >'+arquivo_resposta_aceitacao)
-            time.sleep(0.05)       
+            time.sleep(0.5)       
             arquivo = open(arquivo_resposta_aceitacao,'r')
             resposta = arquivo.readlines()
             #print(resposta)

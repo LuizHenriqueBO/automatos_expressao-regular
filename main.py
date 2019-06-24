@@ -1,3 +1,7 @@
+
+'''
+Grupo: Luiz Henrique, Juliano, Luis Otavio, Henriko.
+'''
 import os # biblioteca pra usar o método de limpar a tela
 from ER_AFND import *
 from infixa_posfixa import *

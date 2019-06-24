@@ -7,8 +7,9 @@ from ER_AFND import *
 from infixa_posfixa import *
 from AFND_AFD import *
 import time
+import subprocess
 
-from os import popen
+# from os import popen
 
 def main():
     print("EXPRESSÃO REGUAR VS AUTOMATOS")
@@ -49,7 +50,10 @@ def main():
             AFD.criar_arquivo(arquivo_AFD,'DFA')
             AFD.criar_arquivo_AFD_MINIZAR(arquivo_AFD_para_minimizar)
 
-            popen('python3 min-AFD.py '+arquivo_AFD_para_minimizar+' '+arquivo_AFD_MINIMO)
+            processo = subprocess.Popen(['python3', 'min-AFD.py', arquivo_AFD_para_minimizar, arquivo_AFD_MINIMO])
+            if processo.wait() != 0:
+                print(" Erro no processo!", processo.errors)
+                
 
             # popen('python3 min-AFD.py '+arquivo_AFD_para_minimizar+' '+arquivo_AFD_MINIMO+' > res.txt')
             # popen('python3 fla/main.py' +arquivo_AFD_MINIMO+' >'+arquivo_resposta_aceitacao)
@@ -96,27 +100,27 @@ def main():
 
 def testar_automato(arquivo_automato, exp_reg, automato):
 
-    testar = input("\n TESTAR AUTOMATO ?  [ SIM == '0' ]   [ NÃO != 0 ] : ")
-    if testar == '0':
+    testar = input("\n TESTAR AUTOMATO ?  [ SIM == 's' ] : ")
+    if testar == 's':
         arquivo_resposta_aceitacao = 'resposta.txt'
         criar_arq = open(arquivo_resposta_aceitacao,'w')
         criar_arq.close()
 
-        print(" ESPRESSÃO: ",exp_reg)
-        testar_novamente = '0'
-        while(testar_novamente == '0'):
+        testar_novamente = 's'
+        while(testar_novamente == 's'):
 
-            
+            print("\n ESPRESSÃO: ",exp_reg)
             palavra_teste = verificar_teste(automato)
-            popen('python3 fla/main.py '+arquivo_automato+' '+palavra_teste+' >'+arquivo_resposta_aceitacao)
-            time.sleep(0.5)       
+            processo = subprocess.Popen(['python3', 'fla/main.py', arquivo_automato, palavra_teste, ' >',arquivo_resposta_aceitacao])
+            if processo.wait() != 0:
+                print(" Erro no processo!")
             arquivo = open(arquivo_resposta_aceitacao,'r')
             resposta = arquivo.readlines()
-            #print(resposta)
+            print()
             for i in resposta:
                 print(i)
             arquivo.close()
-            testar_novamente = input(" TESTAR NOVAMENTE ?  [ SIM == '0' ]   [ NÃO != 0 ] : ")
+            testar_novamente = input(" TESTAR NOVAMENTE ?  [ SIM == 's' ] : ")
         
     
 
@@ -131,10 +135,8 @@ def verificar_teste(automato):
                 continuar = False
             else:
                 continuar = True
-                print(" PALAVRA NÃO FAZ PARTE DO ALFABETO DE ENTRADA, TENTE NOVAMENTE!")
+                print("\n PALAVRA NÃO FAZ PARTE DO ALFABETO DE ENTRADA, TENTE NOVAMENTE!")
                 print(" OBS: ALFABETO DE ENTRADA: ",automato.alfabeto)
-                input()
-                # os.system('cls' if os.name == 'nt' else 'clear')
                 break
     return palavra_teste
 

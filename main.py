@@ -2,50 +2,138 @@ import os # biblioteca pra usar o método de limpar a tela
 from ER_AFND import *
 from infixa_posfixa import *
 from AFND_AFD import *
+import time
+
+from os import popen
 
 def main():
     print("EXPRESSÃO REGUAR VS AUTOMATOS")
-    alfabeto_entrada = ''
+    expressao_regular = ''
     AFND = ''
     AFD = ''
+    AFD_minimizado = ''
+    arquivo_AFD_MINIMO = 'AFD_MINIMO.txt'
     opcao = -1
+    arquivo_AFD_para_minimizar = 'AFD_minimizar.txt'
+    arquivo_AFND = 'AFND.txt'
+    arquivo_AFD = 'AFD.txt'
+    palavra_teste = ''
+
+
     while(opcao != '0'):
 
         # limpa a tela no Windows ou Linux
         os.system('cls' if os.name == 'nt' else 'clear')
+        print("\n")
+        print(" FUNCIONALIDADES: ")
+        print(" [1] Inserir ER")
+        print(" [2] Emitir ER")
+        print(" [3] Emitir AFND")
+        print(" [4] Emitir AFD")
+        print(" [5] Emitir AFD MINIMIZADO")
+        print(" [0] Sair")
 
-        print("FUNCIONALIDADES: ")
-        print("[1] Inserir ER")
-        print("[2] Imprimir ER")
-        print("[3] Imprimir AFND")
-        print("[4] Imprimir AFD")
-        #print("[5] Imprimir AFD MINIMIZADO")
-        print("[0] Sair")
-        
-        opcao = input(">> ")
+        opcao = input("\n  >> ")
         if(opcao == '1'):                                            # 'a*+c*.(q*.w*.e*)+t*+(m*.y*)+o*'
-            # alfabeto_entrada = 'a*+c*.(q*.w*.e*)+t*+(m*.y*)+o*'  
-            alfabeto_entrada = input('INSIRA A EXPRESSÃO REGULAR : ')    
-            alfabeto_entrada = analise_expressao(alfabeto_entrada)
-            AFND = converter__ER__AFND(alfabeto_entrada)
+            # expressao_regular = '0+1*.0'  
+            expressao_regular = input('\n INSIRA A EXPRESSÃO REGULAR : ')    
+            expressao_regular = analise_expressao(expressao_regular)
+            AFND = converter__ER__AFND(expressao_regular)
             AFD = conversao_AFND_AFD(AFND)
+
+            AFND.criar_arquivo(arquivo_AFND,'NDFA')
+            AFD.criar_arquivo(arquivo_AFD,'DFA')
+            AFD.criar_arquivo_AFD_MINIZAR(arquivo_AFD_para_minimizar)
+
+            popen('python3 min-AFD.py '+arquivo_AFD_para_minimizar+' '+arquivo_AFD_MINIMO)
+
+            # popen('python3 min-AFD.py '+arquivo_AFD_para_minimizar+' '+arquivo_AFD_MINIMO+' > res.txt')
+            # popen('python3 fla/main.py' +arquivo_AFD_MINIMO+' >'+arquivo_resposta_aceitacao)
+
 
         if(opcao == '2'):
             os.system('cls' if os.name == 'nt' else 'clear')
-            print(alfabeto_entrada)
+            print("\n ESPRESSÃO: ",expressao_regular)
             input()
+
+
         if(opcao == '3'):
             os.system('cls' if os.name == 'nt' else 'clear')
             AFND.imprimir_automato()
-            input()
+            testar_automato(arquivo_AFND, expressao_regular, AFND)
+
+
         if(opcao == '4'):
             os.system('cls' if os.name == 'nt' else 'clear')
             AFD.imprimir_automato()
-            input()
-        # if(opcao == '5'):
-        #     os.system('cls' if os.name == 'nt' else 'clear')
+            testar_automato(arquivo_AFD, expressao_regular, AFD)
+
+
+        if(opcao == '5'):
+            os.system('cls' if os.name == 'nt' else 'clear')
+            arquivo = open(arquivo_AFD_MINIMO,'r')
+            dados = arquivo.readlines()
+            for i in dados:
+                print(i,end="")
+            print("\n")
+            arquivo.close()
+            testar_automato(arquivo_AFD_MINIMO,expressao_regular,AFD)
+
+
+            # palavra_teste = verificar_teste(expressao_regular, AFD)
+            # popen('python3 fla/main.py '+arquivo_AFD_MINIMO+' '+palavra_teste+' >'+arquivo_resposta_aceitacao)            
+            # arquivo = open(arquivo_resposta_aceitacao)
+            # resposta = arquivo.readlines()
+            # for i in resposta:
+            #     print(i)
+            # arquivo.close()
+
+
+
+def testar_automato(arquivo_automato, exp_reg, automato):
+
+    testar = input("\n TESTAR AUTOMATO ?  [ SIM == '0' ]   [ NÃO != 0 ] : ")
+    if testar == '0':
+        arquivo_resposta_aceitacao = 'resposta.txt'
+        criar_arq = open(arquivo_resposta_aceitacao,'w')
+        criar_arq.close()
+
+        print(" ESPRESSÃO: ",exp_reg)
+        testar_novamente = '0'
+        while(testar_novamente == '0'):
+
             
-        #     input()        
-      
+            palavra_teste = verificar_teste(automato)
+            popen('python3 fla/main.py '+arquivo_automato+' '+palavra_teste+' >'+arquivo_resposta_aceitacao)
+            time.sleep(0.05)       
+            arquivo = open(arquivo_resposta_aceitacao,'r')
+            resposta = arquivo.readlines()
+            #print(resposta)
+            for i in resposta:
+                print(i)
+            arquivo.close()
+            testar_novamente = input(" TESTAR NOVAMENTE ?  [ SIM == '0' ]   [ NÃO != 0 ] : ")
+        
+    
+
+
+def verificar_teste(automato):
+    palavra_teste = ''
+    continuar = True
+    while(continuar):
+        palavra_teste = input(" INSIRA A PALAVRA DE TESTE: ") 
+        for i in range(len(palavra_teste)):
+            if palavra_teste[i] in automato.alfabeto:
+                continuar = False
+            else:
+                continuar = True
+                print(" PALAVRA NÃO FAZ PARTE DO ALFABETO DE ENTRADA, TENTE NOVAMENTE!")
+                print(" OBS: ALFABETO DE ENTRADA: ",automato.alfabeto)
+                input()
+                # os.system('cls' if os.name == 'nt' else 'clear')
+                break
+    return palavra_teste
+
+
 if __name__ == '__main__':
 	main()

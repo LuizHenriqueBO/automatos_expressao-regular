@@ -8,7 +8,7 @@ def conversao_AFND_AFD(AFND):
     estado1 = AFND.get_estados_epsilon(AFND.inicio)
     eclosure[AFND.inicio] = estado1
     AFD = Automato()
-    AFND.inicio = contador
+    # AFND.inicio = contador
     estados = [[estado1,contador]]
     todos_estados[contador] = estado1
     contador +=1
